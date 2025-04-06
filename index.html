@@ -15,6 +15,24 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+  <style>
+    .sound-button {
+      color: #776e65;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0 20px;
+      border: none;
+      background: #8f7a66;
+      color: #f9f6f2;
+      height: 40px;
+      line-height: 42px;
+      display: inline-block;
+      text-align: center;
+      margin-left: 10px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -29,6 +47,7 @@
     <div class="above-game">
       <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
       <a class="restart-button">New Game</a>
+      <a class="sound-button" id="sound-toggle">🔊 Sound</a>
     </div>
 
     <div class="game-container">
@@ -93,7 +112,19 @@
   <script src="js/grid.js"></script>
   <script src="js/tile.js"></script>
   <script src="js/local_storage_manager.js"></script>
+  <script src="js/sound_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+  
+  <script>
+    // サウンドトグルボタンの機能を追加
+    document.getElementById('sound-toggle').addEventListener('click', function() {
+      var soundManager = window.soundManager;
+      if (soundManager) {
+        var isMuted = soundManager.toggleMute();
+        this.textContent = isMuted ? '🔇 Muted' : '🔊 Sound';
+      }
+    });
+  </script>
 </body>
 </html>
